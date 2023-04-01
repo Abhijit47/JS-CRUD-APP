@@ -23,6 +23,16 @@ body {
   width: 0 !important;
 }
 
+.search {
+  background-color: #a5b4fc;
+  width: 100%;
+  border: none;
+  padding: 10px;
+  outline-color: #0891b2;
+  border-radius: 100px;
+  margin-bottom: 10px;
+}
+
 #addNew {
   display: flex;
   justify-content: space-between;

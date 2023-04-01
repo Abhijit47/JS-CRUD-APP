@@ -7,6 +7,10 @@ let tasks = document.getElementById("tasks");
 let add = document.getElementById("add");
 let taskHeading = document.getElementById('task-heading');
 
+let search = document.querySelector('.search');
+
+
+
 form.addEventListener("submit", (e) => {
   e.preventDefault();
   formValidation();
@@ -99,3 +103,40 @@ let resetForm = () => {
   console.log(data);
   createTasks();
 })();
+
+const getSearchValue = (e) => {
+  // console.log(e.target.value);
+  const searchValue = e.target.value;
+
+  for (let i = 0; i < data.length; i++) {
+    const element = data[i];
+    if (element.text == searchValue) {
+      console.log(element.text);
+      return "return";
+    }
+    else {
+      console.log("Not found");
+    }
+
+
+  }
+  // data.forEach((el, i) => {
+  //   console.log(i, el);
+  //   if (el.text === searchValue) {
+  //     console.log("Matched");
+  //     msg.innerHTML = "Matched"
+  //     data[i].pop()
+  //   }
+  //   else {
+  //     console.log("Not Matched");
+  //     msg.innerHTML = "Not Matched";
+  //   }
+  //   // else if (el.text !== searchValue) {
+  //   //   console.log("Not Matched");
+  //   //   msg.innerHTML = "Not Matched"
+  //   // }
+
+  // })
+}
+
+search.addEventListener('change', getSearchValue);

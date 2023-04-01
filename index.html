@@ -20,6 +20,12 @@
   <body>
     <div class="app">
       <h4 class="mb-3 text-center text-uppercase">JS crud App</h4>
+      <input
+        type="search"
+        name="search"
+        id="search"
+        autocomplete="off"
+        class="search" />
 
       <div id="addNew" data-bs-toggle="modal" data-bs-target="#form">
         <span class="text-opacity-100">Add New Task</span>
@@ -52,7 +58,7 @@
                 id="textInput"
                 required
                 autocomplete="off" />
-              <div id="msg"></div>
+              <!-- <div id="msg"></div> -->
               <br />
               <p>Due Date</p>
               <input
@@ -87,6 +93,7 @@
       </form>
 
       <h5 class="text-center my-3" id="task-heading">Tasks</h5>
+      <div id="msg"></div>
 
       <div id="tasks"></div>
     </div>
