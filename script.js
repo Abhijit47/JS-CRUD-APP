@@ -3,8 +3,10 @@ let textInput = document.getElementById("textInput");
 let dateInput = document.getElementById("dateInput");
 let textarea = document.getElementById("textarea");
 let msg = document.getElementById("msg");
-let tasks = document.getElementById("tasks");
+// let tasks = document.getElementById("tasks");
+let tasks = document.querySelector("#tasks");
 let add = document.getElementById("add");
+
 let taskHeading = document.getElementById('task-heading');
 
 let search = document.querySelector('.search');
@@ -55,21 +57,22 @@ let createTasks = () => {
   else {
     taskHeading.style.display = "block";
     tasks.innerHTML = "";
-    data.map((x, y) => {
-      return (tasks.innerHTML += `
-      <div id=${y}>
-          <span class="fw-bold">${x.text}</span>
-          <span class="small text-secondary">${x.date}</span>
-          <p>${x.description}</p>
-  
+    data.map((item, id) => {
+
+      let htmlElem = `
+        <div id=${id}>
+          <span class="fw-bold">${item.text}</span>
+          <span class="small text-secondary">${item.date}</span>
+          <p>${item.description}</p>
+
           <span class="options">
             <i onClick= "editTask(this)" data-bs-toggle="modal" data-bs-target="#form" class="fas fa-edit"></i>
             <i onClick ="deleteTask(this);createTasks()" class="fas fa-trash-alt"></i>
           </span>
-      </div>
-    `);
+        </div>
+      `
+      return (tasks.innerHTML += htmlElem);
     });
-
     resetForm();
   }
 };
@@ -108,35 +111,19 @@ const getSearchValue = (e) => {
   // console.log(e.target.value);
   const searchValue = e.target.value;
 
-  for (let i = 0; i < data.length; i++) {
-    const element = data[i];
-    if (element.text == searchValue) {
-      console.log(element.text);
-      return "return";
+
+
+  data.forEach(item => {
+    const isVisible = item.text.includes(searchValue) || item.description.includes(searchValue);
+
+    if (searchValue === "") {
+      tasks.classList.remove('hidden', !isVisible);
+      searchValue.value = ""
     }
-    else {
-      console.log("Not found");
-    }
 
-
-  }
-  // data.forEach((el, i) => {
-  //   console.log(i, el);
-  //   if (el.text === searchValue) {
-  //     console.log("Matched");
-  //     msg.innerHTML = "Matched"
-  //     data[i].pop()
-  //   }
-  //   else {
-  //     console.log("Not Matched");
-  //     msg.innerHTML = "Not Matched";
-  //   }
-  //   // else if (el.text !== searchValue) {
-  //   //   console.log("Not Matched");
-  //   //   msg.innerHTML = "Not Matched"
-  //   // }
-
-  // })
+    tasks.classList.toggle('hidden', isVisible);
+    searchValue.value = ""
+  })
 }
 
-search.addEventListener('change', getSearchValue);
+search.addEventListener('input', getSearchValue);
